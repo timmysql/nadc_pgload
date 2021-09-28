@@ -1,0 +1,8 @@
+database_files
+database.ini
+venv/
+venv/*
+__pycache__
+
+
+
