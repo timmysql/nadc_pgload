@@ -9,7 +9,7 @@ import fileinput
 from config import config_alchemy
 import db_connect as dbc
 import sqlalchemy
-import etl_sequence as etl
+import sql_procedures_etl as etl
 
 
 
@@ -345,6 +345,24 @@ def insert_panda_files_to_sql():
             except Exception as e:
                 raise
 
+def test_single_file(file_name):
+    files = glob.glob(FolderConfig.unzip_full_path + '*.txt')
+    for i in files:
+        # print(file_name)
+        filepath = i
+        # print(filepath)
+        table_name = i.replace(FolderConfig.unzip_full_path, '')
+        table_name = table_name.replace('.txt', '').replace('.TXT','')
+        
+
+        if file_name in filepath:
+            print(filepath)
+            df = csv_to_df(filepath)
+            df.info(verbose=True)
+
+
+
+
 def run_process(run_dl, run_fs, run_insert, run_etl):
     if run_dl == 1:
         try:
@@ -372,20 +390,6 @@ def run_process(run_dl, run_fs, run_insert, run_etl):
             raise        
 
 
-def test_single_file(file_name):
-    files = glob.glob(FolderConfig.unzip_full_path + '*.txt')
-    for i in files:
-        # print(file_name)
-        filepath = i
-        # print(filepath)
-        table_name = i.replace(FolderConfig.unzip_full_path, '')
-        table_name = table_name.replace('.txt', '').replace('.TXT','')
-        
-
-        if file_name in filepath:
-            print(filepath)
-            df = csv_to_df(filepath)
-            df.info(verbose=True)
 
 
 if __name__ == '__main__':

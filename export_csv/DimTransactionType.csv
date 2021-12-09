@@ -1,0 +1,8 @@
+,TransactionType,TransactionTypeDesr
+0,D,Direct
+1,IE,Independent Expenditure
+2,IK,In-Kind
+3,LN,Loan
+4,NI,Not Indicated
+5,PS,Personal Service
+6,UP,Unpaid Pledge

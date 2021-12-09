@@ -1,7 +1,9 @@
 import psycopg2
 from config import config
+# import db_connect as dbc
 
 ### send some sql to these so you don't have to write so much code... ugh
+
 
  
 def pg_return_dataset(pg_sql):
@@ -87,7 +89,9 @@ def pg_execute(pg_sql):
             
             conn.close()
             # print('Database connection closed.')
-    
+            
+            
+   
 
 if __name__ == '__main__':
     pg_sql = f"""SELECT * FROM commlatefile;"""
