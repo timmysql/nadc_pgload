@@ -394,8 +394,8 @@ def run_process(run_dl, run_fs, run_insert, run_etl):
 
 if __name__ == '__main__':
     # test_single_file('formb73.txt')
-    run_dl = 1
-    run_fs = 1   
-    run_insert = 1
+    run_dl = 0
+    run_fs = 0   
+    run_insert = 0
     run_etl = 1
     run_process(run_dl=run_dl, run_fs=run_fs, run_insert=run_insert, run_etl=run_etl)

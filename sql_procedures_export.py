@@ -86,15 +86,15 @@ def export_dim_contributors():
 
 if __name__ == '__main__':
     # NADC_STAGE
-    export_table_as_csv(database='nadc_stage', schema='dw', table_name='DimCandidates')
-    export_table_as_csv(database='nadc_stage', schema='dw', table_name='DimCommittees')
-    export_table_as_csv(database='nadc_stage', schema='dbo', table_name='vDimContributors')
-    export_table_as_csv(database='nadc_stage', schema='dbo', table_name='vDimRecipients')
-    export_table_as_csv(database='nadc_stage', schema='dw', table_name='DimDate')
-    export_table_as_csv(database='nadc_stage', schema='dw', table_name='DimEntities')
-    export_table_as_csv(database='nadc_stage', schema='dw', table_name='DimSupportOppose')
-    export_table_as_csv(database='nadc_stage', schema='dw', table_name='DimTransactionType')    
-    export_table_as_csv(database='nadc_stage', schema='ffp',table_name='vFactContributions')
+    export_table_as_csv(database='nadc_flatwater', schema='dw', table_name='DimCandidates')
+    export_table_as_csv(database='nadc_flatwater', schema='dw', table_name='DimCommittees')
+    export_table_as_csv(database='nadc_flatwater', schema='dbo', table_name='vDimContributors')
+    export_table_as_csv(database='nadc_flatwater', schema='dbo', table_name='vDimRecipients')
+    export_table_as_csv(database='nadc_flatwater', schema='dw', table_name='DimDate')
+    export_table_as_csv(database='nadc_flatwater', schema='dw', table_name='DimEntities')
+    export_table_as_csv(database='nadc_flatwater', schema='dw', table_name='DimSupportOppose')
+    export_table_as_csv(database='nadc_flatwater', schema='dw', table_name='DimTransactionType')    
+    export_table_as_csv(database='nadc_flatwater', schema='ffp',table_name='vFactContributions')
     # export_table_as_csv(table_name='FactExpenditures')
     # export_dim_contributors()  
           

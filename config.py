@@ -24,7 +24,7 @@ def generate_db_ini():
         section = 'postgresql'
         config.add_section(section)
         config.set(section, 'host', 'localhost')
-        config.set(section, 'database', 'nadc')
+        config.set(section, 'database', 'nadc_flatwater')
         config.set(section, 'user', 'yourusername')
         config.set(section, 'password', 'yourpassword')
 
@@ -113,7 +113,7 @@ def config_mssql(filename='database.ini', section='mssql'):
         db = f"""mssql+pyodbc://osint:osint@localhost:port/databasename?driver=ODBC+Driver+17+for+SQL+Server"""
         # db = f"""mssql+pymssql://{host}\\SQLEXPRESS/{database}?trusted_connection=yes"""
 
-        connection_string = "DRIVER={ODBC Driver 17 for SQL Server};SERVER=DESKTOP-AIJMJAR\SQLEXPRESS;DATABASE=nadc;UID=osint;PWD=osint"
+        connection_string = "DRIVER={ODBC Driver 17 for SQL Server};SERVER=DESKTOP-AIJMJAR\SQLEXPRESS;DATABASE=nadc_flatwater;UID=osint;PWD=osint"
         db = URL.create("mssql+pyodbc", query={"odbc_connect": connection_string})
         
     else:

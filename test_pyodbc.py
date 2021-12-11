@@ -5,7 +5,7 @@ import pyodbc
 server = 'DESKTOP-AIJMJAR\\SQLEXPRESS'
 # server = 'localhost'
 # 'tcp:myserver.database.windows.net' 
-database = 'nadc' 
+database = 'nadc_flatwater' 
 username = 'osint' 
 password = 'osint' 
 
@@ -16,7 +16,7 @@ cnxn = pyodbc.connect(
     Trusted_Connection='No',
     Driver='{ODBC Driver 17 for SQL Server}',
     Server=server,
-    Database='nadc',
+    Database='nadc_flatwater',
     UID=username,
     PWD=password
 )
