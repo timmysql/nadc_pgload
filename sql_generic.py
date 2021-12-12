@@ -1,5 +1,5 @@
 import psycopg2
-from config import config
+from db_config import config
 # import db_connect as dbc
 
 ### send some sql to these so you don't have to write so much code... ugh

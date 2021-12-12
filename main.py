@@ -1,5 +1,5 @@
-import download_files_and_insert as dfi
-import config as cfg
+import insert_files_sqlserver as dfi
+import db_config as cfg
 import sql_procedures_etl as etl
 
 if __name__ == '__main__':  
@@ -13,7 +13,7 @@ if __name__ == '__main__':
     run_fs = 1 # fix the headers   p
     run_insert = 1 # insert files into postgres > nadc database
     run_etl = 1
-
+    # cfg.config
     # #
     etl.sql_truncate_stage()
     dfi.run_process(run_dl=run_dl, run_fs=run_fs, run_insert=run_insert, run_etl=run_etl)

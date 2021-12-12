@@ -1,12 +1,12 @@
-import urllib.request
-import shutil
+# import urllib.request
+# import shutil
 import os
 import pandas as pd
 import numpy as np
 import glob
 import fileinput
 # import config
-from config import config_alchemy
+from db_config import config_mssql
 import db_connect as dbc
 import sqlalchemy
 import sql_procedures_etl as etl
@@ -26,17 +26,17 @@ class FolderConfig:
     unzip_full_path = folder + unzip_folder + '\\'
 
 
-def download_the_files():
-    print(FolderConfig.folder)
-    if not os.path.exists(FolderConfig.folder):
-        os.makedirs(FolderConfig.folder)
+# def download_the_files():
+#     print(FolderConfig.folder)
+#     if not os.path.exists(FolderConfig.folder):
+#         os.makedirs(FolderConfig.folder)
     
-    print("folder: " + FolderConfig.folder)
-    print("download_path: " + FolderConfig.download_path)
-    urllib.request.urlretrieve(FolderConfig.url, FolderConfig.download_path)
-    # shutil.unpack_archive(filename[, extract_dir[, format]])
-    shutil.unpack_archive(FolderConfig.download_path, FolderConfig.folder, 'zip')
-    print('download complete')
+#     print("folder: " + FolderConfig.folder)
+#     print("download_path: " + FolderConfig.download_path)
+#     urllib.request.urlretrieve(FolderConfig.url, FolderConfig.download_path)
+#     # shutil.unpack_archive(filename[, extract_dir[, format]])
+#     shutil.unpack_archive(FolderConfig.download_path, FolderConfig.folder, 'zip')
+#     print('download complete')
 
 
 # def fix_csv_headers():
@@ -314,10 +314,7 @@ def sqlcol(dfparam):
     return dtypedict
 
 def insert_panda_files_to_sql():
-    # LIST FILES IN UNZIPPED LOCATION
     files = glob.glob(FolderConfig.unzip_full_path + '*.txt')
-    
-    # ITERATE THROUGH LIST 
     for i in files:
         filepath = i
         table_name = i.replace(FolderConfig.unzip_full_path, '')
@@ -348,56 +345,60 @@ def insert_panda_files_to_sql():
             except Exception as e:
                 raise
 
-# def test_single_file(file_name):
-#     files = glob.glob(FolderConfig.unzip_full_path + '*.txt')
-#     for i in files:
-#         # print(file_name)
-#         filepath = i
-#         # print(filepath)
-#         table_name = i.replace(FolderConfig.unzip_full_path, '')
-#         table_name = table_name.replace('.txt', '').replace('.TXT','')
+def test_single_file(file_name):
+    files = glob.glob(FolderConfig.unzip_full_path + '*.txt')
+    for i in files:
+        # print(file_name)
+        filepath = i
+        # print(filepath)
+        table_name = i.replace(FolderConfig.unzip_full_path, '')
+        table_name = table_name.replace('.txt', '').replace('.TXT','')
         
 
-#         if file_name in filepath:
-#             print(filepath)
-#             df = csv_to_df(filepath)
-#             df.info(verbose=True)
+        if file_name in filepath:
+            print(filepath)
+            df = csv_to_df(filepath)
+            df.info(verbose=True)
 
 
 
 
 # def run_process(run_dl, run_fs, run_insert, run_etl):
-#     if run_dl == 1:
-#         try:
-#             print('download_the_files')
-#             download_the_files()
-#         except Exception as e:
-#             raise
-#     if run_fs == 1:
-#         try:
-#             print('fixing strings')
-#             fix_csv_headers()
-#         except Exception as e:
-#             raise
-#     if run_insert == 1:        
-#         try:
-#             print('insert files')
-#             insert_panda_files_to_sql()
-#         except Exception as e:
-#             raise
-#     if run_etl == 1:        
-#         try:
-#             print('running etl')
-#             etl.run_etl()
-#         except Exception as e:
-#             raise        
+    # if run_dl == 1:
+    #     try:
+    #         print('download_the_files')
+    #         download_the_files()
+    #     except Exception as e:
+    #         raise
+    # if run_fs == 1:
+    #     try:
+    #         print('fixing strings')
+    #         fix_csv_headers()
+    #     except Exception as e:
+    #         raise
+    # if run_insert == 1:        
+    #     try:
+    #         print('insert files')
+    #         insert_panda_files_to_sql()
+    #     except Exception as e:
+    #         raise
+    # if run_etl == 1:        
+    #     try:
+    #         print('running etl')
+    #         etl.run_etl()
+    #     except Exception as e:
+    #         raise        
 
 
 
 
 if __name__ == '__main__':
-    # test_single_file('formb73.txt')
-    insert_panda_files_to_sql()
+    insert_panda_files_to_sql() 
+    # etl.run_etl()
+    
+    
+    
+    # # test_single_file('formb73.txt')
     # run_dl = 0
     # run_fs = 0   
     # run_insert = 0

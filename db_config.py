@@ -3,15 +3,15 @@ from configparser import ConfigParser, RawConfigParser
 import os
 from sqlalchemy.engine import URL
 
-# ini_file = 'database.ini'
+config_ini = 'db_config.ini'
 
 def write_file():
-    config.write(open('database.ini', 'w'))
+    config.write(open(config_ini, 'w'))
 
 
 def generate_db_ini():
     # parser = ConfigParser()
-    if not os.path.exists('database.ini'):
+    if not os.path.exists(config_ini):
         # config['postgresql'] = {'host': 'localhost', 'database': 'nadc', 'user': 'yourusername', 'password': 'yourpassword'}
         # write_file()
         config = RawConfigParser()
@@ -30,10 +30,11 @@ def generate_db_ini():
 
 
 # Writing our configuration file to 'example.cfg'
-    with open('database.ini', 'w') as configfile:
+    with open(config_ini, 'w') as configfile:
         config.write(configfile)
 
-def config(filename='database.ini', section='postgresql'):
+
+def config(filename=config_ini, section='postgresql'):
     # create a parser
     parser = ConfigParser()
     # read config file
@@ -49,7 +50,7 @@ def config(filename='database.ini', section='postgresql'):
         raise Exception('Section {0} not found in the {1} file'.format(section, filename))
     return db
 
-def config_alchemy(filename='database.ini', section='postgresql'):
+def config_postgres(filename=config_ini, section='postgresql'):
     # create a parser
     parser = ConfigParser()
     # read config file
@@ -80,7 +81,7 @@ def config_alchemy(filename='database.ini', section='postgresql'):
     return db    
 
 
-def config_mssql(filename='database.ini', section='mssql'):
+def config_mssql(filename='db_config.ini', section='mssql'):
     # create a parser
     parser = ConfigParser()
     # read config file
@@ -110,10 +111,11 @@ def config_mssql(filename='database.ini', section='mssql'):
         # db = f"""mssql+pyodbc://{host}*\\SQLEXPRESS/{database};trusted_connection=yes"""
         # db = f"""mssql+pymssql:/{user}:{password}@{host}/{database}"""
         # db = f"""mssql+pymssql://{user}:{password}@{host}\\\\SQLEXPRESS/{database}"""
-        db = f"""mssql+pyodbc://osint:osint@localhost:port/databasename?driver=ODBC+Driver+17+for+SQL+Server"""
+        # db = f"""mssql+pyodbc://osint:osint@localhost:port/databasename?driver=ODBC+Driver+17+for+SQL+Server"""
         # db = f"""mssql+pymssql://{host}\\SQLEXPRESS/{database}?trusted_connection=yes"""
 
-        connection_string = "DRIVER={ODBC Driver 17 for SQL Server};SERVER=DESKTOP-AIJMJAR\SQLEXPRESS;DATABASE=nadc_flatwater;UID=osint;PWD=osint"
+        # connection_string = "DRIVER={ODBC Driver 17 for SQL Server};SERVER=DESKTOP-AIJMJAR\SQLEXPRESS;DATABASE=nadc_flatwater;UID=osint;PWD=osint"
+        connection_string = "DRIVER={ODBC Driver 17 for SQL Server};" + f"""SERVER={host};DATABASE={database};UID={user};PWD={password}"""
         db = URL.create("mssql+pyodbc", query={"odbc_connect": connection_string})
         
     else:
